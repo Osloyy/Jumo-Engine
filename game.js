@@ -47,6 +47,7 @@ function clearCanvas() {
 
 function updateGameObjects() {
     for (let i = 0; i < gameObjects.length; i++) {
+        let jumpForce = -12;
         gameObjects[i].update();
         console.log('player x: ', player.x);
         console.log('player y: ', player.y);
@@ -59,7 +60,7 @@ function updateGameObjects() {
         }
         if (spacekey && !isJumping) {
             if (player.y + player.height >= canvas.height) {
-                player.velocityY = -12;
+                player.velocityY = jumpForce;
                 isJumping = true;
             }
         }
@@ -74,7 +75,7 @@ function drawGameObjects() {
         gameObjects[i].draw();
     }
     ctx.fillStyle = 'red';
-    ctx.fillRect(player.x, player.y, player.w, player.h);
+    ctx.fillRect(player.x, player.y, player.width, player.height);
 }
 
 function gameLoop() {
@@ -113,7 +114,7 @@ function GameObject(x,y, width, height, color) {
 
 function init() {
     // Create game objects and add them to the array
-    player = new Player(50, 300, 10, 50, 'red');
+    player = new Player(50, 300, 15, 15, 'red');
     gameObjects.push(player);
 
     document.addEventListener('keydown', handleKeyDown);
