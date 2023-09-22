@@ -11,6 +11,7 @@ let rightkey = false;
 let spacekey = false;
 let isJumping = false;
 
+
 function handleKeyDown(event) {
     //console.log('Key down: ' + event.code)
     if (event.code === 'KeyA') {
@@ -50,9 +51,7 @@ function updateGameObjects() {
     for (let i = 0; i < gameObjects.length; i++) {
         let jumpForce = -12;
         gameObjects[i].update();
-        console.log('player x: ', player.x);
-        console.log('player y: ', player.y);
-        
+
         if (leftkey) {
             player.x -= 5;
         }
@@ -65,6 +64,7 @@ function updateGameObjects() {
                 isJumping = true;
             }
         }
+
         if (player.y + player.height >= canvas.height) {
             isJumping = false;
         }
