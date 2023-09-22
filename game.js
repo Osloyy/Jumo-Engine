@@ -5,6 +5,34 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 let gameObjects = [];
 
+let leftkey = false;
+let rightkey = false;
+let spacekey = false;
+let isJumping = false;
+
+function handleKeyDown(event) {
+    //console.log('Key down: ' + event.code)
+    if (event.code === 'KeyA') {
+        leftkey = true;
+    } else if (event.code === 'KeyD') {
+        rightkey = true;
+    } else if (event.code === 'Space') {
+        spacekey = true;
+    }
+}
+
+function handleKeyUp(event) {
+    //console.log('Key up: ' + event.code)
+    if (event.code === 'KeyA') {
+        leftkey = false;
+    } else if (event.code === 'KeyD') {
+        rightkey = false;
+    } else if (event.code === 'Space') {
+        spacekey = false;
+    }
+}
+
+
 function Player(x , y, width, height, color) {
     GameObject.call(this, x, y, width, height, color);
 }
@@ -20,6 +48,24 @@ function clearCanvas() {
 function updateGameObjects() {
     for (let i = 0; i < gameObjects.length; i++) {
         gameObjects[i].update();
+        console.log('player x: ', player.x);
+        console.log('player y: ', player.y);
+        
+        if (leftkey) {
+            player.x -= 5;
+        }
+        if (rightkey) {
+            player.x += 5;
+        }
+        if (spacekey && !isJumping) {
+            if (player.y + player.height >= canvas.height) {
+                player.velocityY = -12;
+                isJumping = true;
+            }
+        }
+        if (player.y + player.height >= canvas.height) {
+            isJumping = false;
+        }
     }
 }
 
@@ -49,7 +95,7 @@ function GameObject(x,y, width, height, color) {
 
     this.update = function() {
         // Update objects here
-        const grav = 0.5;
+        let grav = 0.5;
         this.velocityY += grav;
         this.y += this.velocityY;
 
@@ -67,8 +113,11 @@ function GameObject(x,y, width, height, color) {
 
 function init() {
     // Create game objects and add them to the array
-    player = new Player(50, 50, 30, 30, 'red');
+    player = new Player(50, 300, 10, 50, 'red');
     gameObjects.push(player);
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
 
     gameLoop();
 }
