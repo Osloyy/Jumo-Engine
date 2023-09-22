@@ -2,6 +2,8 @@
 // Jumo Engine
 // Version: 0.1
 
+//import JumoEngine from "./jumo.js";
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 let gameObjects = [];
@@ -75,7 +77,7 @@ function drawGameObjects() {
     for (let i = 0; i < gameObjects.length; i++) {
         gameObjects[i].draw();
     }
-    ctx.fillStyle = 'red';
+    ctx.fillStyle = 'purple';
     ctx.fillRect(player.x, player.y, player.width, player.height);
 }
 
@@ -115,7 +117,7 @@ function GameObject(x,y, width, height, color) {
 
 function init() {
     // Create game objects and add them to the array
-    player = new Player(50, 300, 15, 15, 'red');
+    player = new Player(50, 300, 15, 15, 'purple');
     gameObjects.push(player);
 
     document.addEventListener('keydown', handleKeyDown);
