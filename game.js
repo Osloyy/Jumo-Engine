@@ -77,7 +77,7 @@ function drawGameObjects() {
     for (let i = 0; i < gameObjects.length; i++) {
         gameObjects[i].draw();
     }
-    ctx.fillStyle = 'purple';
+    ctx.fillStyle = 'orange';
     ctx.fillRect(player.x, player.y, player.width, player.height);
 }
 
@@ -117,7 +117,7 @@ function GameObject(x,y, width, height, color) {
 
 function init() {
     // Create game objects and add them to the array
-    player = new Player(50, 300, 15, 15, 'purple');
+    player = new Player(50, 300, 15, 15, 'orange');
     gameObjects.push(player);
 
     document.addEventListener('keydown', handleKeyDown);
