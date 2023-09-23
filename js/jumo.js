@@ -6,7 +6,7 @@ class JumoEngine {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
         this.gameObjects = [];
-
+        this.backgroundColor = 'black';
         this.leftKey = false;
         this.rightKey = false;
         this.spaceKey = false;
@@ -48,7 +48,7 @@ class JumoEngine {
     }
 
     clearCanvas() {
-        this.ctx.fillStyle = 'black';
+        this.ctx.fillStyle = this.backgroundColor;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
