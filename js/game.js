@@ -27,7 +27,7 @@ function init() {
     const engine = new window.JumoEngine('gameCanvas', customUpdate);
     const player = engine.createPlayer(50, 300, 15, 15, 'orange');
 
-    engine.backgroundColor = 'green';
+    engine.backgroundColor = 'black';
 
     engine.gameLoop();
 }
