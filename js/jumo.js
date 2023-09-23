@@ -7,6 +7,7 @@ class JumoEngine {
         this.ctx = this.canvas.getContext('2d');
         this.gameObjects = [];
         this.backgroundColor = 'black';
+
         this.leftKey = false;
         this.rightKey = false;
         this.spaceKey = false;
@@ -42,9 +43,9 @@ class JumoEngine {
     }
 
     createPlayer(x, y, width, height, color) {
-    const player = new Player(x, y, width, height, color, this.canvas); // Pass this.canvas
-    this.gameObjects.push(player);
-    return player;
+        const player = new Player(x, y, width, height, color, this.canvas);
+        this.gameObjects.push(player);
+        return player;
     }
 
     clearCanvas() {
