@@ -8,6 +8,8 @@ class JumoEngine {
         this.gameObjects = [];
         this.backgroundColor = 'black';
 
+        this.LevelManager = new LevelManager(this);
+
         this.leftKey = false;
         this.rightKey = false;
         this.spaceKey = false;
@@ -16,6 +18,10 @@ class JumoEngine {
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
+    }
+
+    clearGameObjects() {
+        this.gameObjects = [];
     }
 
     handleKeyDown(event) {
@@ -136,6 +142,41 @@ class Player extends GameObject {
         if (this.y + this.height > this.canvas.height) {
             this.y = this.canvas.height - this.height;
             this.velocityY = 0;
+        }
+    }
+}
+
+
+class LevelManager {
+    constructor(engine) {
+        this.engine = engine;
+        this.levels = [];
+        this.currentLevelIndex = -1;
+    }
+
+    addLevel(levelData) {
+        this.levels.push(levelData);
+    }
+
+    loadNextLevel(levelIndex) {
+        if (levelIndex >= 0 && levelIndex < this.levels.length) {
+            const levelData = this.levels[levelIndex];
+            this.engine.clearGameObjects();
+            this.engine.createPlayer(levelData.player.x, levelData.player.y, levelData.player.width, levelData.player.height, levelData.player.color);
+        } else {
+
+        }
+    }
+
+    loadLevel(levelIndex) {
+        if (levelIndex >= 0 && levelIndex < this.levels.length) {
+            const levelData = this.levels[levelIndex];
+
+            engine.clearGameObjects();
+            // Init GameObjects for levels
+
+        } else {
+            console.error('Invalid level index: ${levelIndex}');
         }
     }
 }
